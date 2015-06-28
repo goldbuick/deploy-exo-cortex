@@ -1,2 +1,2 @@
-# exo-cortex-deploy
+# deploy-exo-cortex
 exo-cortex automation via dockerode
