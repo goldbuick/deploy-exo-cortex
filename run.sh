@@ -27,7 +27,6 @@ docker run --name barrier \
     --link private:private \
     --link rethinkdb:rethinkdb \
     --link base:base \
-    --link terminal:terminal \
     -p 8080:70 \
     -p 8888:7080 \
     -p 7154:6154 \
