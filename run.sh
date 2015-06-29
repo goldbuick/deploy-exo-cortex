@@ -2,11 +2,10 @@
 
 mkdir docker-data
 
+    # -v "$PWD/docker-data:/etc/nginx/htpasswd" \
 docker rm -f frontage
 docker run --name frontage \
-    -v "$PWD/docker-data:/etc/nginx/htpasswd" \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
-    -p 80:80 \
     -d goldbuick/util-proxy
 
 docker rm -f ui-config
@@ -31,11 +30,13 @@ docker run --name base \
     --link rethinkdb:rethinkdb \
     -d goldbuick/stem-base
 
+    # -p 7154:6154 \
+    # -p 26154:16154 \
 docker rm -f barrier
 docker run --name barrier \
     --link base:base \
-    -p 7154:6154 \
-    -p 26154:16154 \
+    --link frontage:frontage \
+    -p 80:70 \
     -v "$PWD/docker-data:/var/nginx" \
     -d goldbuick/util-barrier
 
